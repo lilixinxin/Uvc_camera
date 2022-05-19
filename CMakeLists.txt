@@ -7,12 +7,12 @@ set(CMAKE_CXX_COMPILER /home/nanhe/RV1109/prebuilts/gcc/linux-x86/arm/gcc-arm-8.
 #uvc camera
 project(uvc_camera)
 
-file(GLOB SOURCES  "src/src/*.c")
+file(GLOB SOURCES  "src/*.c")
 
 #executable
 add_executable(uvccamera  ${SOURCES})
 
 target_include_directories(uvccamera
     PRIVATE
-    $(PROJECT_SOURCE_NAME)/src/include
+    $(PROJECT_SOURCE_NAME)/include
 )
