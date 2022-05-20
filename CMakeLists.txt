@@ -9,10 +9,19 @@ project(uvc_camera)
 
 file(GLOB SOURCES  "src/*.c")
 
+#library position
+link_directories(/home/nanhe/project/Uvc_Camera/lib)
+
 #executable
 add_executable(uvccamera  ${SOURCES})
 
+
 target_include_directories(uvccamera
-    PRIVATE
+    PUBLIC
     $(PROJECT_SOURCE_NAME)/include
 )
+
+#link library
+target_link_libraries(uvccamera 
+    PRIVATE
+-ljpeg)

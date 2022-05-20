@@ -1,5 +1,5 @@
-
 #include "dev_camera.h"
+#include "dev_jpeg.h"
 
 int  main(int argc, char *argv[])
 {
@@ -13,6 +13,7 @@ int  main(int argc, char *argv[])
     char outfile[24] = {0};
     int ret = 0;
     int Width, Height;
+    FILE *jpegfd = NULL;
 
     usage(argc);
 
@@ -51,6 +52,21 @@ int  main(int argc, char *argv[])
     ret = Uvc_SaveFile(outfile, &buf, video_num);
     if(ret != 0)
         perror("Uvc_SaveFile fail\n");    
+    
+    uint8_t* rgb = calloc(Width * Height * 3, sizeof (uint8_t));
+
+    jpegfd = fopen("jepg", "wb");
+    if(jpegfd == NULL)
+    {   
+        perror("open jpeg fail\n");
+        return -1;
+    }
+    for(int i = 0; i < video_num; i++){
+        yuyv_to_rgb(rgb, framebuf[i].start, 640, 480);
+        rgb_compress_jpeg(jpegfd, rgb, 640, 480, 100);
+    }
+    fclose(jpegfd);
+
 
     return 0;
 }

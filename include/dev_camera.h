@@ -22,27 +22,106 @@ struct videobuffer{
 
 struct videobuffer framebuf[video_num];
 
+/******************************************************************************
+ * Function:    usage
+ *
+ * Description: 使用说明
+ * Input:       
+ * Output:      NULL
+ * Returns:     NULL
+ ******************************************************************************/
 void usage(int argc);
 
 /*open video device*/
+/******************************************************************************
+ * Function:    Uvc_OpenDevice
+ *
+ * Description: open video device
+ * Input:       video_name  
+ * Output:      NULL
+ * Returns:     0 success
+ *              -1 fail
+ ******************************************************************************/
 int Uvc_OpenDevice(char *video_name);
 
 /*get device cap*/
+/******************************************************************************
+ * Function:    Uvc_GetDeviceCap
+ *
+ * Description: 获取设备能力
+ * Input:       cap  
+ * Output:      NULL
+ * Returns:     0 success
+ *              -1 fail
+ ******************************************************************************/
 int Uvc_GetDeviceCap(struct v4l2_capability *cap);
 
 /*get video fmt*/
+/******************************************************************************
+ * Function:    Uvc_GetVideoFmt
+ *
+ * Description: 获取视频格式
+ * Input:       fmt  
+ * Output:      NULL
+ * Returns:     0 success
+ *              -1 fail
+ ******************************************************************************/
 int Uvc_GetVideoFmt(struct v4l2_fmtdesc *fmt);
 
 /*Set video fmt*/
+/******************************************************************************
+ * Function:    Uvc_SetDeviceFmt
+ *
+ * Description: 设置视频格式
+ * Input:       format  
+ *              Width
+ *              Height
+ * Output:      NULL
+ * Returns:     0 success
+ *              -1 fail
+ ******************************************************************************/
 int Uvc_SetDeviceFmt(struct v4l2_format *format, int Width, int Height);
 
 /*申请内存缓冲区并且映射*/
+/******************************************************************************
+ * Function:    Uvc_ReqBuf
+ *
+ * Description: 申请内存缓冲区并且映射
+ * Input:       reqbuf  
+ *              buf
+ *              video_count  帧数
+ * Output:      NULL
+ * Returns:     0 success
+ *              -1 fail
+ ******************************************************************************/
 int Uvc_ReqBuf(struct v4l2_requestbuffers *reqbuf, struct v4l2_buffer *buf, int video_count);
 
 /*stream on*/
+/******************************************************************************
+ * Function:    Uvc_StreamOn
+ *
+ * Description: 取流
+ * Input:       buf  
+ *              video_count 帧数
+ *              type  
+ * Output:      NULL
+ * Returns:     0 success
+ *              -1 fail
+ ******************************************************************************/
 int Uvc_StreamOn(struct v4l2_buffer *buf, int video_count, enum v4l2_buf_type *type);
 
 /*write file*/
+/******************************************************************************
+ * Function:    Uvc_SaveFile
+ *
+ * Description: 取到的数据流保存在oufile文件
+ * Input:       outfile  
+ *              buf 
+ *              video_count  帧数
+ * Output:      NULL
+ * Returns:     0 success
+ *              -1 fail
+ ******************************************************************************/
 int Uvc_SaveFile(char *outfile, struct v4l2_buffer *buf, int video_count);
 
 
